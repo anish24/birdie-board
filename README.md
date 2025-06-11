@@ -1,4 +1,4 @@
-## Getting Started
+## Birdie Board
 
 Golf Scoring - Made Easy.
 
