@@ -26,16 +26,25 @@ export default function PlayerCount({
       >
         How many players 
       </motion.h1>
-      <motion.input
-        type="range"
-        min={1}
-        max={4}
+      <motion.div
+      className="w-full"
+      variants={itemVariants}
+      >
+        <input
+          type="range"
+          min={1}
+          max={4}
+          value={playerCount}
+          onChange={(e) => setPlayerCount(Number(e.target.value))}
+          className="accent-secondary hover:accent-primary w-full"
+        />
+      </motion.div>
+      <motion.p
         variants={itemVariants}
-        value={playerCount}
-        onChange={(e) => setPlayerCount(Number(e.target.value))}
-        className="accent-secondary hover:accent-primary w-full"
-      />
-      <motion.p variants={itemVariants} className="text-center text-lg font-medium">Players: {playerCount}</motion.p>
+        className="text-center text-lg font-medium"
+      >
+        Players: {playerCount}
+      </motion.p>
       <motion.button
         className="rounded-full border border-solid bg-secondary hover:bg-primary border-transparent transition-colors flex items-center justify-center text-background gap-2 dark:hover:bg-[#ccc] font-bold text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full md:w-full"
         onClick={onNext}
