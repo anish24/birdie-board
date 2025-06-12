@@ -16,7 +16,7 @@ export default function GameType({
   onPrev,
 }: Props) {
   const baseButtonClass =
-    "rounded-small border border-solid cursor-pointer transition-colors flex flex items-center justify-center text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-bold text-sm sm:text-base h-10 sm:h-12 px-4 w-1/2"
+    "rounded-small border border-solid cursor-pointer transition-colors flex flex items-center justify-center text-background gap-2 hover:bg-[#383838] font-bold text-sm sm:text-base h-10 sm:h-12 px-4 w-1/2"
   return (
     <motion.div
           className="flex flex-col gap-4"
@@ -59,7 +59,7 @@ export default function GameType({
         <motion.button
           type="button"
           variants={itemVariants}
-          className="rounded-full cursor-pointer border border-solid bg-primary hover:bg-secondary border-transparent transition-colors flex items-center justify-center text-background gap-2 dark:hover:bg-[#ccc] font-bold text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full md:w-full"
+          className="rounded-full cursor-pointer border border-solid bg-primary hover:bg-secondary border-transparent transition-colors flex items-center justify-center text-background gap-2 font-bold text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full md:w-full"
           onClick={onNext}
         >
           Next
@@ -67,7 +67,7 @@ export default function GameType({
         <motion.button
           type="button"
           variants={itemVariants}
-          className="rounded-full cursor-pointer border-solid bg-transparent text-secondary hover:bg-secondary hover:text-white border-2 border-secondary transition-colors flex items-center justify-center gap-2 dark:hover:bg-[#ccc] font-bold text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full md:w-full"
+          className="rounded-full cursor-pointer border-solid bg-transparent text-secondary hover:bg-secondary hover:text-white border-2 border-secondary transition-colors flex items-center justify-center gap-2 font-bold text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full md:w-full"
           onClick={onPrev}
         >
           Previous

@@ -46,7 +46,7 @@ export default function PlayerCount({
         Players: {playerCount}
       </motion.p>
       <motion.button
-        className="rounded-full border border-solid bg-secondary hover:bg-primary border-transparent transition-colors flex items-center justify-center text-background gap-2 dark:hover:bg-[#ccc] font-bold text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full md:w-full"
+        className="rounded-full border border-solid bg-secondary hover:bg-primary border-transparent transition-colors flex items-center justify-center text-background gap-2 font-bold text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full md:w-full"
         onClick={onNext}
         variants={itemVariants}
       >

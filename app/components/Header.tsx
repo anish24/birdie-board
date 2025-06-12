@@ -20,7 +20,7 @@ export default function Header() {
       </Link>
         {isScorecard && (
           <Link
-            className="rounded-full border border-solid bg-primary border-transparent transition-colors flex items-center justify-center text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-bold text-sm sm:text-base h-8 sm:h-10 px-4 sm:px-5 sm:w-auto"
+            className="rounded-full border border-solid bg-primary border-transparent transition-colors flex items-center justify-center text-background gap-2 hover:bg-[#383838] font-bold text-sm sm:text-base h-8 sm:h-10 px-4 sm:px-5 sm:w-auto"
             href="/dashboard/new-game"
           >
             Start new round
