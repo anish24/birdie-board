@@ -50,7 +50,7 @@ export default function PlayerNames({
             <input
               type="text"
               value={playerNames[index] || ""}
-              className="block p-2 w-full border-1 h-7 sm:h-8 border-solid border-gray-800 rounded-sm shadow-sm focus:border-secondary sm:text-sm"
+              className="block p-2 w-full border-1 h-7 sm:h-8 border-solid border-gray-800 rounded-sm shadow-sm sm:text-base text-[16px] focus:outline-none focus:ring-2 focus:ring-secondary"
               onChange={(e) => handleNameChange(index, e.target.value)}
             />
           </label>

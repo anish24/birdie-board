@@ -39,7 +39,7 @@ export default function GameType({
         <motion.button
           type="button"
           className={`${baseButtonClass} ${
-            gameType === 9 ? "bg-primary" : "bg-secondary"
+            gameType === 9 ? "bg-primary border-secondary" : "bg-secondary"
           }`}
           onClick={() => setGameType(9)}
         >
@@ -48,7 +48,7 @@ export default function GameType({
         <motion.button
           type="button"
           className={`${baseButtonClass} ${
-            gameType === 18 ? "bg-primary" : "bg-secondary"
+            gameType === 18 ? "bg-primary border-secondary" : "bg-secondary"
           }`}
           onClick={() => setGameType(18)}
         >
