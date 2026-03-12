@@ -8,13 +8,13 @@ export default function Home() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="flex flex-col gap-10 pt-2"
+      className="flex flex-col gap-4 pt-2"
     >
       <motion.div variants={itemVariants} className="flex flex-col gap-4">
         <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
           Golf Scoring
         </span>
-        <h2 className="text-[2.75rem] font-black leading-[0.95] tracking-tight text-foreground">
+        <h2 className="text-[2.75rem] font-black leading-[0.95] tracking-tight text-primary">
           Made for<br />the course.
         </h2>
         <p className="text-sm text-stone-500 leading-relaxed">

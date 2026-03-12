@@ -24,7 +24,7 @@ export default function PlayerCount({
         <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
           Step 1 of 3
         </span>
-        <h1 className="text-[2.75rem] font-black leading-[0.95] tracking-tight">
+        <h1 className="text-[2.75rem] font-black leading-[0.95] tracking-tight text-secondary">
           How many<br />players?
         </h1>
       </motion.div>

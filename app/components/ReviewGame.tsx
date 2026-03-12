@@ -39,7 +39,7 @@ export default function ReviewGame({
         <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
           Ready to play
         </span>
-        <h1 className="text-[2.75rem] font-black leading-[0.95] tracking-tight">
+        <h1 className="text-[2.75rem] font-black leading-[0.95] tracking-tight text-secondary">
           Review your<br />game.
         </h1>
       </motion.div>
