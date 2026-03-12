@@ -43,6 +43,7 @@ export default function ReviewGame({
           Review your<br />game.
         </h1>
       </motion.div>
+      
       <motion.div variants={itemVariants} className="flex flex-col gap-3">
         <div className="bg-stone-50 border border-stone-100 rounded-2xl p-4 flex flex-col gap-3">
           <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-stone-400">
