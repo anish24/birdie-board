@@ -15,7 +15,7 @@ export default function PlayerCount({
 }: Props) {
   return (
     <motion.div
-      className="flex flex-col gap-10 pt-2"
+      className="flex flex-col gap-8 pt-2"
       variants={containerVariants}
       initial="hidden"
       animate="visible"

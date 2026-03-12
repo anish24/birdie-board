@@ -8,7 +8,7 @@ export default function Home() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="flex flex-col gap-4 pt-2"
+      className="flex flex-col gap-8 pt-2"
     >
       <motion.div variants={itemVariants} className="flex flex-col gap-4">
         <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
