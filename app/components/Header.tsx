@@ -8,24 +8,22 @@ export default function Header() {
   const isScorecard = pathname.startsWith("/dashboard/game")
 
   return (
-    <header
-    className={`justify-items-start justify-between ${isScorecard && "flex flex-row w-full gap-4 items-center mt-4"}`}
-    >
+    <header className="flex flex-row items-center justify-between w-full">
       <Link href="/">
         {isScorecard ? (
-          <Logo className="w-24"></Logo>
+          <Logo className="w-20" />
         ) : (
-          <Logo className="w-64"></Logo>
+          <Logo className="w-44" />
         )}
       </Link>
-        {isScorecard && (
-          <Link
-            className="rounded-full border border-solid bg-primary border-transparent transition-colors flex items-center justify-center text-background gap-2 hover:bg-[#383838] font-bold text-sm sm:text-base h-8 sm:h-10 px-4 sm:px-5 sm:w-auto"
-            href="/dashboard/new-game"
-          >
-            Start new round
-          </Link>
-        )}
+      {isScorecard && (
+        <Link
+          className="rounded-full bg-primary hover:bg-primary/90 active:scale-[0.98] transition-all flex items-center justify-center text-white font-bold text-xs h-8 px-4"
+          href="/dashboard/new-game"
+        >
+          New round
+        </Link>
+      )}
     </header>
   )
 }

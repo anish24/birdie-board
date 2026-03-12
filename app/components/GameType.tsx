@@ -15,64 +15,75 @@ export default function GameType({
   onNext,
   onPrev,
 }: Props) {
-  const baseButtonClass =
-    "rounded-small border border-solid cursor-pointer transition-colors flex flex items-center justify-center text-background gap-2 hover:bg-[#383838] font-bold text-sm sm:text-base h-10 sm:h-12 px-4 w-1/2"
   return (
     <motion.div
-          className="flex flex-col gap-4"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-      <motion.h1
-        className="text-3xl font-black text-primary tracking-[-.01em]"
-        variants={itemVariants}
-      >
-        How many holes?
-      </motion.h1>
+      className="flex flex-col gap-10 pt-2"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div variants={itemVariants} className="flex flex-col gap-2">
+        <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
+          Step 3 of 3
+        </span>
+        <h1 className="text-[2.75rem] font-black leading-[0.95] tracking-tight">
+          How many<br />holes?
+        </h1>
+      </motion.div>
 
       <motion.fieldset
-        className="flex flex-row items-center gap-4"
+        className="flex flex-row gap-3"
         aria-label="Select game type"
         variants={itemVariants}
       >
         <motion.button
           type="button"
-          className={`${baseButtonClass} ${
-            gameType === 9 ? "bg-primary border-secondary" : "bg-secondary"
+          className={`flex-1 h-28 rounded-2xl flex flex-col items-center justify-center gap-1 border-2 cursor-pointer transition-all active:scale-[0.97] ${
+            gameType === 9
+              ? "bg-primary border-primary text-white"
+              : "bg-white border-stone-200 text-stone-500 hover:border-stone-300"
           }`}
           onClick={() => setGameType(9)}
         >
-          9 Holes
+          <span className="text-4xl font-black leading-none">9</span>
+          <span className="text-[10px] font-bold uppercase tracking-[0.15em] opacity-70">
+            holes
+          </span>
         </motion.button>
         <motion.button
           type="button"
-          className={`${baseButtonClass} ${
-            gameType === 18 ? "bg-primary border-secondary" : "bg-secondary"
+          className={`flex-1 h-28 rounded-2xl flex flex-col items-center justify-center gap-1 border-2 cursor-pointer transition-all active:scale-[0.97] ${
+            gameType === 18
+              ? "bg-primary border-primary text-white"
+              : "bg-white border-stone-200 text-stone-500 hover:border-stone-300"
           }`}
           onClick={() => setGameType(18)}
         >
-          18 Holes
+          <span className="text-4xl font-black leading-none">18</span>
+          <span className="text-[10px] font-bold uppercase tracking-[0.15em] opacity-70">
+            holes
+          </span>
         </motion.button>
       </motion.fieldset>
 
+      <div className="flex flex-col gap-3">
         <motion.button
           type="button"
           variants={itemVariants}
-          className="rounded-full cursor-pointer border border-solid bg-primary hover:bg-secondary border-transparent transition-colors flex items-center justify-center text-background gap-2 font-bold text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full md:w-full"
+          className="rounded-full bg-primary hover:bg-primary/90 active:scale-[0.98] cursor-pointer transition-all flex items-center justify-center text-white font-bold text-sm h-12 px-5 w-full"
           onClick={onNext}
         >
-          Next
+          Continue
         </motion.button>
         <motion.button
           type="button"
           variants={itemVariants}
-          className="rounded-full cursor-pointer border-solid bg-transparent text-secondary hover:bg-secondary hover:text-white border-2 border-secondary transition-colors flex items-center justify-center gap-2 font-bold text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full md:w-full"
+          className="rounded-full border-2 border-stone-200 hover:border-stone-300 active:scale-[0.98] cursor-pointer transition-all flex items-center justify-center text-stone-500 font-bold text-sm h-12 px-5 w-full"
           onClick={onPrev}
         >
-          Previous
+          Back
         </motion.button>
-        
+      </div>
     </motion.div>
   )
 }

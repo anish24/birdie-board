@@ -10,6 +10,7 @@ type Props = {
   onNext: () => void
   onPrev: () => void
 }
+
 export default function PlayerNames({
   playerNames,
   setPlayerNames,
@@ -25,51 +26,57 @@ export default function PlayerNames({
 
   return (
     <motion.div
-      className="flex flex-col gap-5 items-start"
+      className="flex flex-col gap-10 pt-2"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      <motion.h1
-        variants={itemVariants}
-        className="text-3xl font-black text-primary"
-      >
-        Enter player names
-      </motion.h1>
-      {Array.from({ length: playerCount }, (_, index) => (
-        <motion.div
-          key={index}
-          variants={itemVariants}
-          className="w-full"
-        >
-          <label
-            className="flex flex-col w-full text-sm/6 font-medium text-gray-900"
-            htmlFor={`player-${index}`}
-          >
-            Player {index + 1}:
+      <motion.div variants={itemVariants} className="flex flex-col gap-2">
+        <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
+          Step 2 of 3
+        </span>
+        <h1 className="text-[2.75rem] font-black leading-[0.95] tracking-tight">
+          Enter player<br />names.
+        </h1>
+      </motion.div>
+
+      <motion.div variants={itemVariants} className="flex flex-col gap-4 w-full">
+        {Array.from({ length: playerCount }, (_, index) => (
+          <div key={index} className="flex flex-col gap-1.5">
+            <label
+              className="text-[11px] font-bold uppercase tracking-[0.12em] text-stone-400"
+              htmlFor={`player-${index}`}
+            >
+              Player {index + 1}
+            </label>
             <input
+              id={`player-${index}`}
               type="text"
               value={playerNames[index] || ""}
-              className="block p-2 w-full border-1 h-7 sm:h-8 border-solid border-gray-800 rounded-sm shadow-sm sm:text-base text-[16px] focus:outline-none focus:ring-2 focus:ring-secondary"
+              className="w-full h-12 px-4 bg-stone-50 border border-stone-200 rounded-xl text-sm font-medium placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-[16px]"
+              placeholder={`Player ${index + 1}`}
               onChange={(e) => handleNameChange(index, e.target.value)}
             />
-          </label>
-        </motion.div>
-      ))}
-      <motion.button
-      variants={itemVariants}
-        className="rounded-full border border-solid bg-primary hover:bg-secondary border-transparent transition-colors flex items-center justify-center text-background gap-2 font-bold text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full md:w-full"
-        onClick={onNext}
-      >
-        Next step
-      </motion.button>
-      <motion.button
-      variants={itemVariants}
-        className="rounded-full border-solid bg-transparent text-secondary hover:bg-secondary hover:text-white border-2 border-secondary transition-colors flex items-center justify-center gap-2 font-bold text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full md:w-full"
-        onClick={onPrev}
-      >
-        Previous
-      </motion.button>
+          </div>
+        ))}
+      </motion.div>
+
+      <div className="flex flex-col gap-3">
+        <motion.button
+          variants={itemVariants}
+          className="rounded-full bg-primary hover:bg-primary/90 active:scale-[0.98] transition-all flex items-center justify-center text-white font-bold text-sm h-12 px-5 w-full"
+          onClick={onNext}
+        >
+          Continue
+        </motion.button>
+        <motion.button
+          variants={itemVariants}
+          className="rounded-full border-2 border-stone-200 hover:border-stone-300 active:scale-[0.98] transition-all flex items-center justify-center text-stone-500 font-bold text-sm h-12 px-5 w-full"
+          onClick={onPrev}
+        >
+          Back
+        </motion.button>
+      </div>
     </motion.div>
   )
 }

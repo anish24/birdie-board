@@ -7,24 +7,24 @@ import { containerVariants, itemVariants } from "@/lib/animations"
 export default function DashboardPage() {
   return (
     <motion.div
-      className="flex flex-col items-center gap-3 justify-center h-screen"
+      className="flex flex-col gap-10 pt-2"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      <motion.h1 variants={itemVariants} className="text-4xl font-bold">
-        Dashboard
-      </motion.h1>
+      <motion.div variants={itemVariants} className="flex flex-col gap-2">
+        <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
+          Dashboard
+        </span>
+        <h1 className="text-[2.75rem] font-black leading-[0.95] tracking-tight">
+          Welcome<br />back.
+        </h1>
+      </motion.div>
 
-      <motion.p variants={itemVariants} className="mt-4 text-lg">
-        Welcome to your dashboard!
-      </motion.p>
-
-      {/* Wrap each button individually */}
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-col gap-3">
         <motion.div variants={itemVariants}>
           <Link
-            className="rounded-full border border-solid bg-lime-500 border-transparent transition-colors flex items-center justify-center text-background gap-2 hover:bg-[#383838] font-bold text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto md:w-[200px]"
+            className="rounded-full bg-primary hover:bg-primary/90 active:scale-[0.98] transition-all flex items-center justify-center text-white font-bold text-sm h-12 px-5 w-full"
             href="/dashboard/new-game"
           >
             Start new round
@@ -33,7 +33,7 @@ export default function DashboardPage() {
 
         <motion.div variants={itemVariants}>
           <Link
-            className="rounded-full border border-solid border-lime-500 transition-colors flex items-center justify-center hover:bg-[#f2f2f2] hover:border-transparent font-bold text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[200px]"
+            className="rounded-full border-2 border-stone-200 hover:border-stone-300 active:scale-[0.98] transition-all flex items-center justify-center text-stone-600 font-bold text-sm h-12 px-5 w-full"
             href="/dashboard/history"
           >
             Round history

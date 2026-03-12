@@ -30,48 +30,63 @@ export default function ReviewGame({
 
   return (
     <motion.div
-      className="flex flex-col gap-4"
+      className="flex flex-col gap-10 pt-2"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      <motion.h1
-        className="text-3xl font-black text-primary"
-        variants={itemVariants}
-      >
-        Review your game.
-      </motion.h1>
-
-      <motion.div variants={itemVariants}>
-        <fieldset className="w-full max-w-sm">
-          <legend className="text-xl font-semibold mb-2">Players</legend>
-          <ol className="list-decimal list-inside flex flex-col gap-2">
-            {playerNames.map((name, index) => (
-              <li key={index}>{name || `Player ${index + 1}`}</li>
-            ))}
-          </ol>
-        </fieldset>
+      <motion.div variants={itemVariants} className="flex flex-col gap-2">
+        <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
+          Ready to play
+        </span>
+        <h1 className="text-[2.75rem] font-black leading-[0.95] tracking-tight">
+          Review your<br />game.
+        </h1>
       </motion.div>
 
-      <motion.p className="text-lg font-medium" variants={itemVariants}>
-        Game type: {gameType} holes
-      </motion.p>
+      <motion.div variants={itemVariants} className="flex flex-col gap-3">
+        <div className="bg-stone-50 border border-stone-100 rounded-2xl p-4 flex flex-col gap-3">
+          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-stone-400">
+            Players
+          </p>
+          <ol className="flex flex-col gap-2.5">
+            {playerNames.map((name, index) => (
+              <li key={index} className="flex items-center gap-3">
+                <span className="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center flex-shrink-0">
+                  {index + 1}
+                </span>
+                <span className="text-sm font-semibold text-foreground">
+                  {name || `Player ${index + 1}`}
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
 
+        <div className="bg-stone-50 border border-stone-100 rounded-2xl px-4 py-3.5 flex items-center justify-between">
+          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-stone-400">
+            Game type
+          </p>
+          <p className="text-sm font-bold text-foreground">{gameType} holes</p>
+        </div>
+      </motion.div>
+
+      <div className="flex flex-col gap-3">
         <motion.button
-          className="rounded-full cursor-pointer border border-solid bg-primary hover:bg-secondary border-transparent transition-colors flex items-center justify-center text-background gap-2 font-bold text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full md:w-full"
+          className="rounded-full bg-primary hover:bg-primary/90 active:scale-[0.98] cursor-pointer transition-all flex items-center justify-center text-white font-bold text-sm h-12 px-5 w-full"
           onClick={handleStartGame}
           variants={itemVariants}
-          >
-          Start
+        >
+          Let's play
         </motion.button>
-
         <motion.button
-          className="rounded-full cursor-pointer border-solid bg-transparent text-secondary hover:bg-secondary hover:text-white border-2 border-secondary transition-colors flex items-center justify-center gap-2 font-bold text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full md:w-full"
+          className="rounded-full border-2 border-stone-200 hover:border-stone-300 active:scale-[0.98] cursor-pointer transition-all flex items-center justify-center text-stone-500 font-bold text-sm h-12 px-5 w-full"
           onClick={onPrev}
           variants={itemVariants}
-          >
-          Previous
+        >
+          Back
         </motion.button>
+      </div>
     </motion.div>
   )
 }
