@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #111827;
+  --background: #F5F4F0;
+  --foreground: #111111;
 }
 
 @theme {
@@ -24,7 +24,64 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Remove number input spinners globally */
+/* Custom range slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 9999px;
+  background: #E5E3DD;
+  outline: none;
+  width: 100%;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #00A14B;
+  cursor: pointer;
+  box-shadow: 0 0 0 5px rgba(0, 161, 75, 0.14), 0 2px 10px rgba(0, 161, 75, 0.35);
+  transition: box-shadow 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 8px rgba(0, 161, 75, 0.18), 0 2px 10px rgba(0, 161, 75, 0.35);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #00A14B;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 0 5px rgba(0, 161, 75, 0.14);
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white !important;
+  }
+  main > div {
+    box-shadow: none !important;
+    padding: 12px !important;
+    min-height: unset !important;
+  }
+  input {
+    border: 1px solid #d4d4d4 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* Remove number input spinners */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;

@@ -21,9 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${interSans.variable} antialiased`}>
+      <body className={`${interSans.variable} antialiased bg-[#F5F4F0]`}>
         <main className="flex flex-col items-center min-h-svh">
-          <div className="flex flex-col w-full max-w-sm px-5 pt-6 pb-16 gap-8">
+          <div className="flex flex-col w-full max-w-sm min-h-svh bg-white px-5 pt-6 pb-20 gap-8 shadow-[0_0_0_1px_rgba(0,0,0,0.04),0_8px_48px_rgba(0,0,0,0.07)]">
             <Header />
             {children}
           </div>

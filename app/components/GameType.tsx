@@ -22,11 +22,18 @@ export default function GameType({
       initial="hidden"
       animate="visible"
     >
-      <motion.div variants={itemVariants} className="flex flex-col gap-2">
-        <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
-          Step 3 of 3
-        </span>
-        <h1 className="text-[2.75rem] font-black leading-[0.95] tracking-tight text-secondary">
+      <motion.div variants={itemVariants} className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2.5">
+          <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
+            Step 3 of 3
+          </span>
+          <div className="flex gap-1.5">
+            <div className="h-[3px] flex-1 rounded-full bg-primary" />
+            <div className="h-[3px] flex-1 rounded-full bg-primary" />
+            <div className="h-[3px] flex-1 rounded-full bg-primary" />
+          </div>
+        </div>
+        <h1 className="text-[2.75rem] font-black leading-[0.92] tracking-tight text-secondary">
           How many<br />holes?
         </h1>
       </motion.div>
@@ -38,30 +45,36 @@ export default function GameType({
       >
         <motion.button
           type="button"
-          className={`flex-1 h-28 rounded-2xl flex flex-col items-center justify-center gap-1 border-2 cursor-pointer transition-all active:scale-[0.97] ${
+          className={`flex-1 h-36 rounded-2xl flex flex-col items-center justify-center gap-1.5 border-2 cursor-pointer transition-all active:scale-[0.97] ${
             gameType === 9
               ? "bg-primary border-primary text-white"
-              : "bg-white border-stone-200 text-stone-500 hover:border-stone-300"
+              : "bg-stone-50 border-stone-200 text-stone-500 hover:border-stone-300 hover:bg-stone-100"
           }`}
           onClick={() => setGameType(9)}
         >
-          <span className="text-4xl font-black leading-none">9</span>
-          <span className="text-[10px] font-bold uppercase tracking-[0.15em] opacity-70">
+          <span className="text-5xl font-black leading-none">9</span>
+          <span className="text-[10px] font-bold uppercase tracking-[0.18em] opacity-70">
             holes
+          </span>
+          <span className={`text-[11px] font-semibold mt-0.5 ${gameType === 9 ? "text-white/60" : "text-stone-400"}`}>
+            Front nine
           </span>
         </motion.button>
         <motion.button
           type="button"
-          className={`flex-1 h-28 rounded-2xl flex flex-col items-center justify-center gap-1 border-2 cursor-pointer transition-all active:scale-[0.97] ${
+          className={`flex-1 h-36 rounded-2xl flex flex-col items-center justify-center gap-1.5 border-2 cursor-pointer transition-all active:scale-[0.97] ${
             gameType === 18
               ? "bg-primary border-primary text-white"
-              : "bg-white border-stone-200 text-stone-500 hover:border-stone-300"
+              : "bg-stone-50 border-stone-200 text-stone-500 hover:border-stone-300 hover:bg-stone-100"
           }`}
           onClick={() => setGameType(18)}
         >
-          <span className="text-4xl font-black leading-none">18</span>
-          <span className="text-[10px] font-bold uppercase tracking-[0.15em] opacity-70">
+          <span className="text-5xl font-black leading-none">18</span>
+          <span className="text-[10px] font-bold uppercase tracking-[0.18em] opacity-70">
             holes
+          </span>
+          <span className={`text-[11px] font-semibold mt-0.5 ${gameType === 18 ? "text-white/60" : "text-stone-400"}`}>
+            Full round
           </span>
         </motion.button>
       </motion.fieldset>

@@ -31,11 +31,18 @@ export default function PlayerNames({
       initial="hidden"
       animate="visible"
     >
-      <motion.div variants={itemVariants} className="flex flex-col gap-2">
-        <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
-          Step 2 of 3
-        </span>
-        <h1 className="text-[2.75rem] font-black leading-[0.95] tracking-tight text-secondary">
+      <motion.div variants={itemVariants} className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2.5">
+          <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
+            Step 2 of 3
+          </span>
+          <div className="flex gap-1.5">
+            <div className="h-[3px] flex-1 rounded-full bg-primary" />
+            <div className="h-[3px] flex-1 rounded-full bg-primary" />
+            <div className="h-[3px] flex-1 rounded-full bg-stone-200" />
+          </div>
+        </div>
+        <h1 className="text-[2.75rem] font-black leading-[0.92] tracking-tight text-secondary">
           Enter player<br />names.
         </h1>
       </motion.div>
@@ -44,7 +51,7 @@ export default function PlayerNames({
         {Array.from({ length: playerCount }, (_, index) => (
           <div key={index} className="flex flex-col gap-1.5">
             <label
-              className="text-[11px] font-bold uppercase tracking-[0.12em] text-stone-400"
+              className="text-[10px] font-bold uppercase tracking-[0.18em] text-stone-400"
               htmlFor={`player-${index}`}
             >
               Player {index + 1}
@@ -53,7 +60,7 @@ export default function PlayerNames({
               id={`player-${index}`}
               type="text"
               value={playerNames[index] || ""}
-              className="w-full h-12 px-4 bg-stone-50 border border-stone-200 rounded-xl text-sm font-medium placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-[16px]"
+              className="w-full h-12 px-4 bg-stone-50 border border-stone-200 rounded-xl text-sm font-semibold placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all text-[16px]"
               placeholder={`Player ${index + 1}`}
               onChange={(e) => handleNameChange(index, e.target.value)}
             />

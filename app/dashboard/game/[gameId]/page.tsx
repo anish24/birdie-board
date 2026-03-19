@@ -11,6 +11,7 @@ export default function NewGamePage() {
   const gameType = parseInt(searchParams.get("gameType") || "18") as 9 | 18
 
   const [scores, setScores] = useState<{ [playerIndex: number]: number[] }>({})
+  const [pars, setPars] = useState<number[]>(Array(gameType).fill(0))
 
   return (
       <Scorecard
@@ -18,6 +19,8 @@ export default function NewGamePage() {
         scores={scores}
         setScores={setScores}
         gameType={gameType}
+        pars={pars}
+        setPars={setPars}
       />
   )
 }

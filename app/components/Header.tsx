@@ -8,7 +8,7 @@ export default function Header() {
   const isScorecard = pathname.startsWith("/dashboard/game")
 
   return (
-    <header className="flex flex-row items-center justify-between w-full">
+    <header className="flex flex-row items-center justify-between w-full print:hidden">
       <Link href="/">
         {isScorecard ? (
           <Logo className="w-20" />

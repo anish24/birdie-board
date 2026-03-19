@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation"
 import { v4 as uuidv4 } from "uuid"
 import { motion } from "framer-motion"
 import { containerVariants, itemVariants } from "@/lib/animations"
+import { Users, Disc3 } from "lucide-react"
 
 type Props = {
   playerNames: string[]
@@ -36,19 +37,22 @@ export default function ReviewGame({
       animate="visible"
     >
       <motion.div variants={itemVariants} className="flex flex-col gap-2">
-        <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
+        <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
           Ready to play
         </span>
-        <h1 className="text-[2.75rem] font-black leading-[0.95] tracking-tight text-secondary">
+        <h1 className="text-[2.75rem] font-black leading-[0.92] tracking-tight text-secondary">
           Review your<br />game.
         </h1>
       </motion.div>
-      
+
       <motion.div variants={itemVariants} className="flex flex-col gap-3">
         <div className="bg-stone-50 border border-stone-100 rounded-2xl p-4 flex flex-col gap-3">
-          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-stone-400">
-            Players
-          </p>
+          <div className="flex items-center gap-2">
+            <Users className="w-3.5 h-3.5 text-stone-400" />
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-stone-400">
+              Players
+            </p>
+          </div>
           <ol className="flex flex-col gap-2.5">
             {playerNames.map((name, index) => (
               <li key={index} className="flex items-center gap-3">
@@ -64,9 +68,12 @@ export default function ReviewGame({
         </div>
 
         <div className="bg-stone-50 border border-stone-100 rounded-2xl px-4 py-3.5 flex items-center justify-between">
-          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-stone-400">
-            Game type
-          </p>
+          <div className="flex items-center gap-2">
+            <Disc3 className="w-3.5 h-3.5 text-stone-400" />
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-stone-400">
+              Game type
+            </p>
+          </div>
           <p className="text-sm font-bold text-foreground">{gameType} holes</p>
         </div>
       </motion.div>
@@ -77,7 +84,7 @@ export default function ReviewGame({
           onClick={handleStartGame}
           variants={itemVariants}
         >
-          Let's play
+          Let&apos;s play
         </motion.button>
         <motion.button
           className="rounded-full border-2 border-stone-200 hover:border-stone-300 active:scale-[0.98] cursor-pointer transition-all flex items-center justify-center text-stone-500 font-bold text-sm h-12 px-5 w-full"
