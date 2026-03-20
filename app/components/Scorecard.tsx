@@ -20,14 +20,26 @@ const playerColors = [
   { text: "text-orange-500" },
 ]
 
-function getScoreClass(score: number, par: number): string {
-  if (!par || !score) return "bg-white border-stone-200 text-foreground"
-  const diff = score - par
-  if (diff <= -2) return "bg-purple-100 border-purple-300 text-purple-700"
-  if (diff === -1) return "bg-red-100 border-red-300 text-red-600"
-  if (diff === 0) return "bg-primary/10 border-primary/30 text-primary"
-  if (diff === 1) return "bg-amber-50 border-amber-200 text-amber-700"
-  return "bg-stone-100 border-stone-300 text-stone-500"
+function getSymbolWrapper(score: number, par: number): string {
+  if (!score) return ""
+  if (!par) return "border border-stone-200 rounded-xl bg-white"
+  const d = score - par
+  if (d <= -2) return "rounded-full border-2 border-emerald-600 ring-2 ring-emerald-600 ring-offset-1 bg-emerald-50"
+  if (d === -1) return "rounded-full border-2 border-blue-400 bg-blue-50"
+  if (d === 0)  return ""
+  if (d === 1)  return "rounded-[3px] border-2 border-amber-500 bg-amber-50"
+  return "rounded-[3px] border-2 border-stone-500 ring-2 ring-stone-500 ring-offset-1 bg-stone-100"
+}
+
+function getSymbolText(score: number, par: number): string {
+  if (!score) return "text-stone-300"
+  if (!par) return "text-foreground font-bold"
+  const d = score - par
+  if (d <= -2) return "text-emerald-700 font-bold"
+  if (d === -1) return "text-blue-600 font-bold"
+  if (d === 0)  return "text-foreground font-bold"
+  if (d === 1)  return "text-amber-700 font-bold"
+  return "text-stone-600 font-bold"
 }
 
 function formatVsPar(diff: number): string {
@@ -37,18 +49,106 @@ function formatVsPar(diff: number): string {
 
 function getVsParColor(diff: number): string {
   if (diff < 0) return "text-emerald-400"
-  if (diff === 0) return "text-white/50"
-  return "text-red-300"
+  if (diff === 0) return "text-stone-500"
+  return "text-red-400"
 }
 
-function scoreStyle(score: number, par: number) {
-  if (!par || !score) return { bg: "#FFFFFF", fg: "#111111", border: "#E7E5E4" }
+type GolfSymbol = "eagle" | "birdie" | "par" | "bogey" | "double" | "none"
+
+function getSymbol(score: number, par: number): GolfSymbol {
+  if (!par || !score) return "none"
   const d = score - par
-  if (d <= -2) return { bg: "#EDE9FE", fg: "#6D28D9", border: "#C4B5FD" }
-  if (d === -1) return { bg: "#FEE2E2", fg: "#DC2626", border: "#FCA5A5" }
-  if (d === 0)  return { bg: "#DCFCE7", fg: "#16A34A", border: "#86EFAC" }
-  if (d === 1)  return { bg: "#FFFBEB", fg: "#D97706", border: "#FDE68A" }
-  return { bg: "#F5F5F4", fg: "#78716C", border: "#D6D3D1" }
+  if (d <= -2) return "eagle"
+  if (d === -1) return "birdie"
+  if (d === 0)  return "par"
+  if (d === 1)  return "bogey"
+  return "double"
+}
+
+function drawScoreCell(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  score: number,
+  par: number,
+  rr: (x: number, y: number, w: number, h: number, r: number | number[]) => void,
+  font: (size: number, weight?: string) => string
+) {
+  const symbol = getSymbol(score, par)
+
+  // Background fill + symbol outline
+  if (symbol === "eagle") {
+    // Outer circle
+    ctx.beginPath()
+    ctx.arc(cx, cy, 19, 0, Math.PI * 2)
+    ctx.fillStyle = "#ECFDF5"
+    ctx.fill()
+    ctx.strokeStyle = "#059669"
+    ctx.lineWidth = 2
+    ctx.stroke()
+    // Inner circle
+    ctx.beginPath()
+    ctx.arc(cx, cy, 13, 0, Math.PI * 2)
+    ctx.strokeStyle = "#059669"
+    ctx.lineWidth = 2
+    ctx.stroke()
+  } else if (symbol === "birdie") {
+    ctx.beginPath()
+    ctx.arc(cx, cy, 17, 0, Math.PI * 2)
+    ctx.fillStyle = "#EFF6FF"
+    ctx.fill()
+    ctx.strokeStyle = "#3B82F6"
+    ctx.lineWidth = 2
+    ctx.stroke()
+  } else if (symbol === "par") {
+    rr(cx - 17, cy - 17, 34, 34, 8)
+    ctx.fillStyle = "#FFFFFF"
+    ctx.fill()
+    ctx.strokeStyle = "#E7E5E4"
+    ctx.lineWidth = 1
+    ctx.stroke()
+  } else if (symbol === "bogey") {
+    rr(cx - 17, cy - 17, 34, 34, 3)
+    ctx.fillStyle = "#FFFBEB"
+    ctx.fill()
+    ctx.strokeStyle = "#D97706"
+    ctx.lineWidth = 2
+    ctx.stroke()
+  } else if (symbol === "double") {
+    // Outer square
+    rr(cx - 20, cy - 20, 40, 40, 3)
+    ctx.fillStyle = "#F5F5F4"
+    ctx.fill()
+    ctx.strokeStyle = "#78716C"
+    ctx.lineWidth = 2
+    ctx.stroke()
+    // Inner square
+    rr(cx - 13, cy - 13, 26, 26, 2)
+    ctx.strokeStyle = "#78716C"
+    ctx.lineWidth = 2
+    ctx.stroke()
+  } else {
+    // No score — empty cell outline
+    rr(cx - 17, cy - 17, 34, 34, 8)
+    ctx.fillStyle = "#FFFFFF"
+    ctx.fill()
+    ctx.strokeStyle = "#E7E5E4"
+    ctx.lineWidth = 1
+    ctx.stroke()
+  }
+
+  // Number on top
+  if (score) {
+    const fg =
+      symbol === "eagle"  ? "#065F46" :
+      symbol === "birdie" ? "#2563EB" :
+      symbol === "bogey"  ? "#D97706" :
+      symbol === "double" ? "#78716C" : "#111111"
+    ctx.fillStyle = fg
+    ctx.font = font(13)
+    ctx.textAlign = "center"
+    ctx.fillText(String(score), cx, cy + 5)
+  }
 }
 
 function buildScorecardCanvas(
@@ -91,10 +191,10 @@ function buildScorecardCanvas(
 
   // ── Header ──────────────────────────────────────────────────────────
   rr(PAD, PAD, W - PAD * 2, HEADER_H, 16)
-  ctx.fillStyle = "#00A14B"
+  ctx.fillStyle = "#1C1917"
   ctx.fill()
 
-  ctx.fillStyle = "rgba(255,255,255,0.45)"
+  ctx.fillStyle = "#78716C"
   ctx.font = font(9)
   ctx.textAlign = "left"
   ctx.fillText("LEADERBOARD", PAD + 14, PAD + 20)
@@ -112,12 +212,12 @@ function buildScorecardCanvas(
     if (vsPar !== null && total > 0) {
       const label = vsPar === 0 ? "E" : vsPar > 0 ? `+${vsPar}` : String(vsPar)
       ctx.font = font(11)
-      ctx.fillStyle = vsPar < 0 ? "#86efac" : vsPar === 0 ? "rgba(255,255,255,0.5)" : "#fca5a5"
+      ctx.fillStyle = vsPar < 0 ? "#34D399" : vsPar === 0 ? "#78716C" : "#F87171"
       ctx.fillText(label, x, PAD + 86)
     }
 
     ctx.font = font(11, "600")
-    ctx.fillStyle = "rgba(255,255,255,0.45)"
+    ctx.fillStyle = "#A8A29E"
     ctx.fillText(
       name.length > 10 ? name.slice(0, 10) + "…" : name,
       x,
@@ -223,19 +323,7 @@ function buildScorecardCanvas(
     names.forEach((_, pi) => {
       const score = scores[pi]?.[hole - 1]
       const cx = pcx(pi)
-      const s = scoreStyle(score, par)
-      rr(cx - 17, cy - 17, 34, 34, 8)
-      ctx.fillStyle = s.bg
-      ctx.fill()
-      ctx.strokeStyle = s.border
-      ctx.lineWidth = 1
-      ctx.stroke()
-      if (score) {
-        ctx.fillStyle = s.fg
-        ctx.font = font(13)
-        ctx.textAlign = "center"
-        ctx.fillText(String(score), cx, cy + 5)
-      }
+      drawScoreCell(ctx, cx, cy, score, par, rr, font)
     })
   })
 
@@ -426,19 +514,19 @@ export default function Scorecard({
 
       <div className="flex flex-col gap-5 w-full">
         {/* Live leaderboard */}
-        <div className="rounded-2xl bg-primary p-4 text-white">
+        <div className="rounded-2xl bg-stone-900 p-4">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-white/55">
+            <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-stone-500">
               Leaderboard
             </span>
-            <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-white/55">
+            <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-stone-500">
               {holesPlayed}/{gameType} holes
             </span>
           </div>
           <div className="flex gap-6">
             {playerTotals.map(({ name, total, vsPar }, i) => (
               <div key={i} className="flex flex-col">
-                <span className="text-3xl font-black tabular-nums leading-none">
+                <span className="text-3xl font-black tabular-nums leading-none text-white">
                   {total || "—"}
                 </span>
                 {vsPar !== null && total > 0 && (
@@ -448,7 +536,7 @@ export default function Scorecard({
                     {formatVsPar(vsPar)}
                   </span>
                 )}
-                <span className="text-[11px] font-semibold text-white/55 mt-1 truncate max-w-[72px]">
+                <span className="text-[11px] font-semibold text-stone-400 mt-1 truncate max-w-[72px]">
                   {name}
                 </span>
               </div>
@@ -474,7 +562,7 @@ export default function Scorecard({
                 {names.map((name, index) => (
                   <th
                     key={index}
-                    className={`py-3 px-2 text-left text-[11px] font-bold truncate max-w-[72px] ${playerColors[index % playerColors.length].text}`}
+                    className={`py-3 px-2 text-center text-[11px] font-bold truncate max-w-[72px] ${playerColors[index % playerColors.length].text}`}
                   >
                     {name}
                   </th>
@@ -506,12 +594,14 @@ export default function Scorecard({
                     const par = pars[hole - 1]
                     return (
                       <td key={index} className="px-2 py-2">
-                        <input
-                          className={`w-10 h-10 text-center font-bold text-sm border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/25 focus:border-primary transition-all ${getScoreClass(score, par)}`}
-                          type="number"
-                          value={score || ""}
-                          onChange={handleScoreChange(index, hole - 1)}
-                        />
+                        <div className={`relative w-10 h-10 ${getSymbolWrapper(score, par)}`}>
+                          <input
+                            className={`absolute inset-0 w-full h-full text-center text-sm bg-transparent border-none outline-none focus:outline-none tabular-nums ${getSymbolText(score, par)}`}
+                            type="number"
+                            value={score || ""}
+                            onChange={handleScoreChange(index, hole - 1)}
+                          />
+                        </div>
                       </td>
                     )
                   })}
